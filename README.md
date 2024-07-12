@@ -20,8 +20,8 @@ This project is an AIS (Automatic Identification System) message simulator writt
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/ais_messages_simulator.git
-    cd ais_messages_simulator
+    git clone https://github.com/salsabiljb/AIS.git
+    cd AIS/ais_messages_simulator
     ```
 
 2. Build the project:
@@ -36,7 +36,7 @@ This project is an AIS (Automatic Identification System) message simulator writt
 To run the sender that reads AIS messages from a file and sends them over UDP:
 
 ```sh
-cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 192.168.1.74:50000
+cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 000.000.0.0:0 
 ```
 
 ### Running Both Sender and Receiver
