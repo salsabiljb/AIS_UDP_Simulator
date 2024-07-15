@@ -36,7 +36,7 @@ This project is an AIS (Automatic Identification System) message simulator writt
 To run the sender that reads AIS messages from a file and sends them over UDP:
 
 ```sh
-cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 000.000.0.0:0 
+cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 0.0.0.0:0 
 ```
 
 ### Running Both Sender and Receiver
@@ -44,7 +44,7 @@ cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 000.000.
 To run both the sender and receiver:
 
 ```sh
-cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 000.000.0.0:0 --bind-addr 000.000.0.0:0 --receiver-file-path /path/to/udp_messages.txt
+cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 0.0.0.0:0 --bind-addr 0.0.0.0:0 --receiver-file-path /path/to/udp_messages.txt
 ```
 
 ### Command-line Arguments
@@ -56,14 +56,14 @@ cargo run -- --sender-file-path /path/to/AIS_messages.txt --target-addr 000.000.
 
 ## Example
 
-To send AIS messages from `AIS_messages.txt` to `000.000.0.0:0`:
+To send AIS messages from `AIS_messages.txt` to `0.0.0.0:0`:
 
 ```sh
-cargo run -- --sender-file-path /home/user/AIS_messages.txt --target-addr 000.000.0.0:0
+cargo run -- --sender-file-path /home/user/AIS_messages.txt --target-addr 0.0.0.0:0
 ```
 
 To send AIS messages and simultaneously receive and save them to `udp_messages.txt`:
 
 ```sh
-cargo run -- --sender-file-path /home/user/AIS_messages.txt --target-addr 000.000.0.0:0 --bind-addr 000.000.0.0:0 --receiver-file-path /home/user/udp_messages.txt
+cargo run -- --sender-file-path /home/user/AIS_messages.txt --target-addr 000.000.0.0:0 --bind-addr 0.0.0.0:0 --receiver-file-path /home/user/udp_messages.txt
 ```
