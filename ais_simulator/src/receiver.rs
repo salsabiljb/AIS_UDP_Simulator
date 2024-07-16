@@ -20,3 +20,43 @@ pub async fn receive_ais_messages(bind_addr: &str, output_file_path: &str) -> Re
         file.write_all(b"\n").await?;
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use tokio::fs;
+    use std::net::UdpSocket;
+    use tokio::time::sleep;
+    use tokio::time::Duration;
+
+    #[tokio::test]
+    async fn test_receive_ais_messages() -> Result<(), Box<dyn Error>> {
+        let bind_addr = "192.168.1.74:50000";
+        let output_file_path = "test_output.txt";
+
+        // Spawn the receiver in a separate task
+        tokio::spawn(async move {
+            receive_ais_messages(bind_addr, output_file_path).await.unwrap();
+        });
+
+        // Give the receiver a moment to start
+        sleep(Duration::from_millis(100)).await;
+
+        // Send a test message
+        let socket = UdpSocket::bind("0.0.0.0:0")?;
+        let message = "test message";
+        socket.send_to(message.as_bytes(), bind_addr)?;
+
+        // Give the receiver time to process the message
+        sleep(Duration::from_millis(100)).await;
+
+        // Verify the output
+        let contents = fs::read_to_string(output_file_path).await?;
+        assert!(contents.contains(message));
+
+        // Clean up
+        fs::remove_file(output_file_path).await?;
+
+        Ok(())
+    }
+}
