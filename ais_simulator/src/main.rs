@@ -1,9 +1,9 @@
-mod sender;
 mod receiver;
+mod sender;
 
+use clap::Parser;
 use std::error::Error;
 use tokio::join;
-use clap::Parser;
 
 /// AIS UDP Streamer
 #[derive(Parser)]
