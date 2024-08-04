@@ -26,10 +26,11 @@ pub async fn send_ais_messages(
     for _ in 0..5 {
         lines.shuffle(&mut rng);
         for line in &lines {
-            let message = line.trim();
+            let mut message = line.trim().to_string();
             if !message.is_empty() {
+                message.push('\n');
                 socket.send_to(message.as_bytes(), target_addr).await?;
-                println!("{}", message);
+                print!("{}", message);
             }
             let delay = Duration::from_millis(100 + rng.gen_range(0..1000));
             time::sleep(delay).await;
